@@ -9,11 +9,13 @@ module.exports = function (app, Joi, validator) {
 
    const arrayRoleSchema = Joi.array().items(roleSchema);
 
-   const queryStringRoleSchema = Joi.number().min(1).required();
+   const paramsStringRoleSchema = Joi.object({
+      id: Joi.number().required(),
+   });
 
    app.get("/roles", validator.response(arrayRoleSchema), role_controller.role);
    app.post("/roles", validator.body(roleSchema), role_controller.createRole);
-   app.get("/roles/:id", validator.response(roleSchema), validator.query(queryStringRoleSchema), role_controller.readRole);
-   app.patch("/roles/:id", validator.body(roleSchema), validator.query(queryStringRoleSchema), role_controller.updateRole);
-   app.delete("/roles/:id", validator.query(queryStringRoleSchema), role_controller.deleteRole);
+   app.get("/roles/:id", validator.response(roleSchema), validator.params(paramsStringRoleSchema), role_controller.readRole);
+   app.patch("/roles/:id", validator.body(roleSchema), validator.params(paramsStringRoleSchema), role_controller.updateRole);
+   app.delete("/roles/:id", validator.params(paramsStringRoleSchema), role_controller.deleteRole);
 };

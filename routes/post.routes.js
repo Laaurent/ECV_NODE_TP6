@@ -7,16 +7,18 @@ module.exports = function (app, Joi, validator) {
       title: Joi.string().required(),
       content: Joi.string().required(),
       date: Joi.string().isoDate().required(),
-      author: Joi.number().min(1).required(),
+      author: Joi.number().required(),
    });
 
    const arrayPostSchema = Joi.array().items(postSchema);
 
-   const queryStringPostSchema = Joi.number().min(1).required();
+   const paramsStringPostSchema = Joi.object({
+      id: Joi.number().required(),
+   });
 
    app.get("/posts", validator.response(arrayPostSchema), post_controller.post);
    app.post("/posts", validator.body(postSchema), post_controller.createPost);
-   app.get("/posts/:id", validator.response(postSchema), validator.query(queryStringPostSchema), post_controller.readPost);
-   app.patch("/posts/:id", validator.body(postSchema), validator.query(queryStringPostSchema), post_controller.updatePost);
-   app.delete("/posts/:id", validator.query(queryStringPostSchema), post_controller.deletePost);
+   app.get("/posts/:id", validator.response(postSchema), validator.params(paramsStringPostSchema), post_controller.readPost);
+   app.patch("/posts/:id", validator.body(postSchema), validator.params(paramsStringPostSchema), post_controller.updatePost);
+   app.delete("/posts/:id", validator.params(paramsStringPostSchema), post_controller.deletePost);
 };
