@@ -1,0 +1,19 @@
+{
+  "name": "tp6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "express-joi-validation": "^5.0.1",
+    "joi": "^17.5.0",
+    "sequelize": "^6.12.5",
+    "sqlite3": "^5.0.2"
+  }
+}
