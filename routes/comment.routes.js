@@ -1,10 +1,9 @@
-const Joi = require("joi");
 var comment_controller = require("../controller/commentsController");
 
 module.exports = function (app, Joi, validator) {
    // COMMENT
    const commentSchema = Joi.object({
-      comment: Joi.number().required(),
+      post: Joi.number().required(),
       content: Joi.string().required(),
       date: Joi.string().isoDate().required(),
       author: Joi.number().required(),

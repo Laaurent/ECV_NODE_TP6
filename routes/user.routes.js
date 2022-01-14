@@ -1,4 +1,3 @@
-const Joi = require("joi");
 var user_controller = require("../controller/usersController");
 
 module.exports = function (app, Joi, validator) {
